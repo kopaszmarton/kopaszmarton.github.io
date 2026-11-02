@@ -18,7 +18,8 @@ Each phase ends with something reviewable. Tick items as they land on `main`.
 - [x] Choose field colour, tile proportion, columns (D-011)
 - [x] Prototype v2: About at the end of the wall, horizon entry, phone view
 - [x] Settle phone columns, About entry, mark colour (D-014)
-- [ ] Design the About section
+- [x] About as a quiet colophon at the end of the wall (D-015)
+- [ ] Choose series representation, colour hex, typeface
 - [ ] Prototype with real photographs (deferred by owner; placeholders are fine for now)
 - [ ] Choose direction; fix design tokens (type, spacing, colour, grid)
 

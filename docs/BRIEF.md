@@ -37,6 +37,9 @@ Navigation is minimal: name (→ home) and About.
 
 ## Tone
 
+Reference points: Hiroshi Sugimoto, Bill Henson. Underground fine art,
+analog, timeless.
+
 Serious · restrained · quiet interface · wild images.
 Classy without being decorative. No visual effects that compete with the
 photographs.
@@ -50,12 +53,14 @@ photographs.
 - Indigo, square, four columns (D-011) · About at the end of the wall (D-012)
 - Conventions may be broken for the philosophy (D-013)
 - No About entry, humble name Kopasz Márton, 2 phone columns, toned marks (D-014)
+- No circle, plain-text contact, deliberate order, no motion (D-015)
 
-## Open questions (About section and details)
+## Open questions
 
-See the latest design questions in the PR / conversation of 2026-11-02;
-answers go into DECISIONS.md.
-
-1. About: what it contains, how it is laid out, and how the wall ends.
-2. Order of the wall, launch size, series behaviour.
-3. Custom domain now or later?
+1. **Series and singles:** how are they represented? Prototype offers
+   "one tile that opens into the series" vs "whole series on the wall,
+   separated by pauses of plain field".
+2. **Exact field colour** (deeper than indigo; colour picker in prototype).
+3. **Typeface** for the About text (seven examples in prototype).
+4. **Triangles on desktop:** appear on hover, or always visible?
+5. **About content:** final statement, bio, contact; long CV later.

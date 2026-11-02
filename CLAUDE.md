@@ -24,10 +24,11 @@ Languages: English and Hungarian.
 - **No text on or around the images.** Words live on the About page only.
   The visitor should forget it is a website: it should feel like looking at
   prints, not using an interface.
-- **One bold colour field.** Indigo (`#2a1fa8`) behind everything. Never white.
-- **Geometry instead of interface.** Controls are large, simple shapes in a
-  tone of the indigo: circle = the person / About, triangle = move through a series, tapping the
-  field = go back. No icons, no menus, no small UI chrome.
+- **One bold colour field.** Deep indigo (exact hex being chosen) behind
+  everything. Never white.
+- **Geometry instead of interface.** The only control shapes are large
+  triangles (in a tone of the field) for moving through a series; tapping
+  anywhere returns to the wall. No icons, no menus, no cursor hints.
 - **About is where the wall ends,** never a tile among the photographs, and
   there is no button or shape that leads to it. The name is small and humble.
 - **Rules may be broken on purpose** (cropped type, shapes over photos) when
@@ -35,8 +36,11 @@ Languages: English and Hungarian.
   the name, accessibility or speed.
 - **Serious, restrained, wild.** The interface is quiet and exact so the
   atmosphere of the photographs can be loud.
-- **No effects for their own sake.** No parallax, no hover gimmicks, no
-  loading spinners, no autoplay. Motion only when it aids viewing.
+- **No motion.** No fades, transitions, parallax, spinners or autoplay.
+  Things appear instantly, like turning a page.
+- **Character:** underground fine-art photography with an analog feel.
+  References (inspiration, not imitation): Hiroshi Sugimoto, Bill Henson.
+- **Contact is plain text,** never a link. No social links.
 
 ## Hard constraints (GitHub Pages)
 

@@ -5,6 +5,27 @@ one — do not edit history.
 
 ---
 
+### D-015 · Quiet end, plain contact, no motion — supersedes the circle in D-010/D-012 — 2026-11-02
+Character: a creative, underground fine-art portfolio with an analog feel,
+something that "survived the century" — not a commercial or social-media site.
+Points of reference (inspiration, not imitation): Hiroshi Sugimoto, Bill Henson.
+
+- **No circle.** The only shapes left are the series triangles; the field is
+  the "back" gesture. About is a quiet, informative text block at the end of
+  the wall, aligned to the wall's columns, like a colophon.
+- **Contact is plain text, not a link.** No social links for now.
+- **Deliberate order** on the wall (no shuffle). Around 40 tiles at most.
+- **No animation or fades anywhere.** Images and the viewer appear instantly;
+  motion would take focus from the photographs. No zoom/hand cursors either:
+  nothing on or over a photograph signals "click me".
+- **Viewer:** a tap anywhere (photo or field) returns to the wall.
+  Triangles on desktop appear only while the pointer is in their zone
+  (proposed, to be confirmed in the prototype); on touch screens they sit
+  below the photograph, never on it.
+- **Cropping:** automatic, centred. No per-photo crop work.
+- **No texture** on the field. **No own domain** yet.
+- Long CV for institutions: decide later.
+
 ### D-014 · No About entry; humble name; phone and marks settled — supersedes parts of D-011/D-012 — 2026-11-02
 - No entry to About at all (the horizon half circle is removed). An entry
   point grabs attention like a commercial site; About is found only by
