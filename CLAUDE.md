@@ -11,13 +11,24 @@ The photographic portfolio of Márton Kopasz, published at
 Photography only — no graphic or visual design work appears here.
 
 Full brief: `docs/BRIEF.md` · Decisions: `docs/DECISIONS.md` · Plan: `docs/ROADMAP.md`
+Prototypes: `prototypes/` (throwaway design studies, not production code)
+
+Languages: English and Hungarian.
 
 ## Philosophy (design follows this, never the reverse)
 
 - **The images are the site.** Everything else exists to get out of their way.
-- **A single stream.** One continuous tiled field of photographs — not
-  categories, not projects, not a blog.
+- **One wall of pictures.** An edge-to-edge grid of equal tiles, no gaps, no
+  borders, no header. A tile is either a single photograph or a series.
+  Not categories, not a blog, and not a social-media feed.
 - **No text on or around the images.** Words live on the About page only.
+  The visitor should forget it is a website: it should feel like looking at
+  prints, not using an interface.
+- **One bold colour field.** A single saturated colour (blue direction; exact
+  hue to be chosen) behind everything. Never white.
+- **Geometry instead of interface.** Controls are large, simple shapes in the
+  field colour's tone: circle = About/identity, triangle = move through a
+  series, tapping the field = go back. No icons, no small UI chrome.
 - **Serious, restrained, wild.** The interface is quiet and exact so the
   atmosphere of the photographs can be loud.
 - **No effects for their own sake.** No parallax, no hover gimmicks, no

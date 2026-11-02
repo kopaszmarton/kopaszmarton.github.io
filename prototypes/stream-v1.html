@@ -1,0 +1,479 @@
+<title>Kopasz Portfolio Prototype</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&display=swap">
+<style>
+/* Layout: an edge-to-edge wall of equal tiles; one bold colour field behind
+   everything; a three-shape vocabulary (circle = identity/about,
+   triangle = move through a series, the field itself = return). */
+:root {
+  color-scheme: dark;
+  --field: #002fa7;                 /* the one colour (default: Klein-like blue) */
+  --mark: color-mix(in oklab, var(--field), white 24%);   /* geometric marks */
+  --mark-strong: color-mix(in oklab, var(--field), white 55%);
+  --ink: #f2f3f7;                   /* About text on the field */
+  --tile-wait: color-mix(in oklab, var(--field), black 35%);
+  --cols: 4;
+  --ratio: 1 / 1;
+  --pad: clamp(14px, 3.5vmin, 44px);
+  --zone: clamp(84px, 17vw, 300px); /* side zone for the series triangles */
+  --zone-v: 24dvh;                  /* bottom zone on portrait screens */
+  --display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --body: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --t-fast: 180ms;
+}
+html, body { background: var(--field); }
+body { color: var(--ink); font-family: var(--body); }
+
+/* ---------- the wall ---------- */
+.wall {
+  display: grid;
+  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+  gap: 0;
+}
+.tile {
+  all: unset;
+  display: block;
+  position: relative;
+  aspect-ratio: var(--ratio);
+  max-width: 100%;
+  background: var(--tile-wait);
+  cursor: zoom-in;
+  overflow: hidden;
+}
+.tile img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  opacity: 0;
+  transition: opacity 400ms ease;
+}
+.tile img.ready { opacity: 1; }
+.tile:focus-visible { outline: 4px solid var(--mark-strong); outline-offset: -4px; z-index: 1; }
+.tile--about, .tile--fill { background: var(--field); }
+.tile--about { cursor: pointer; }
+.tile--fill { cursor: default; pointer-events: none; }
+.tile--about svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.tile--about circle { fill: var(--mark); transition: fill var(--t-fast); }
+.tile--about:hover circle, .tile--about:focus-visible circle { fill: var(--mark-strong); }
+
+/* ---------- viewer ---------- */
+.viewer {
+  position: fixed; inset: 0; z-index: 20;
+  background: var(--field);
+  display: grid; place-items: center;
+  cursor: zoom-out;
+  animation: lift var(--t-fast) ease-out;
+}
+.viewer img {
+  display: block;
+  max-width: calc(100vw - 2 * var(--pad));
+  max-height: calc(100dvh - 2 * var(--pad));
+  object-fit: contain;
+  box-shadow: 0 2vmin 6vmin color-mix(in oklab, var(--field), black 45%);
+  user-select: none; -webkit-user-drag: none;
+}
+.viewer.is-series img { max-width: calc(100vw - 2 * var(--zone)); }
+.tri {
+  all: unset;
+  position: absolute;
+  top: var(--pad); bottom: var(--pad);
+  width: calc(var(--zone) - 1.5 * var(--pad));
+  cursor: pointer;
+  display: none;
+}
+.viewer.is-series .tri { display: block; }
+.tri--prev { left: var(--pad); }
+.tri--next { right: var(--pad); }
+.tri svg { width: 100%; height: 100%; display: block; }
+.tri polygon { fill: var(--mark); transition: fill var(--t-fast); }
+.tri:hover polygon, .tri:focus-visible polygon { fill: var(--mark-strong); }
+@media (orientation: portrait) {
+  .viewer.is-series img {
+    max-width: calc(100vw - 2 * var(--pad));
+    max-height: calc(100dvh - var(--zone-v) - 2 * var(--pad));
+    margin-bottom: var(--zone-v);
+  }
+  .tri { top: auto; bottom: var(--pad); height: calc(var(--zone-v) - var(--pad)); width: calc(50vw - 1.5 * var(--pad)); }
+}
+@keyframes lift { from { opacity: 0; transform: scale(.985); } to { opacity: 1; transform: none; } }
+
+/* ---------- about ---------- */
+.about {
+  position: fixed; inset: 0; z-index: 20;
+  background: var(--field);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+  align-items: center;
+  gap: var(--pad);
+  padding-block: var(--pad);
+  padding-left: max(var(--pad), env(safe-area-inset-left, 0px));
+  padding-right: max(var(--pad), env(safe-area-inset-right, 0px));
+  overflow-y: auto;
+  animation: lift var(--t-fast) ease-out;
+}
+.about__back { all: unset; cursor: pointer; display: block; aspect-ratio: 1; max-width: 100%; }
+.about__back svg { width: 100%; height: 100%; display: block; }
+.about__back circle { fill: var(--mark); transition: fill var(--t-fast); }
+.about__back:hover circle, .about__back:focus-visible circle { fill: var(--mark-strong); }
+.about__text { max-width: 34ch; }
+.about h1 {
+  font-family: var(--display);
+  font-stretch: 125%; font-weight: 850;
+  font-size: clamp(2.2rem, 6vw, 5.5rem);
+  line-height: .9; letter-spacing: -.02em;
+  margin: 0 0 .5em; text-wrap: balance;
+}
+.about p { font-size: clamp(1rem, 1.3vw, 1.2rem); line-height: 1.55; margin: 0 0 1em; font-weight: 350; }
+.about .placeholder { opacity: .62; }
+.lang { display: flex; gap: .4em; margin-top: 2em; }
+.lang button {
+  all: unset; cursor: pointer;
+  font: 700 .85rem/1 var(--body); letter-spacing: .14em;
+  padding: .6em .8em;
+  color: var(--ink); opacity: .5;
+}
+.lang button[aria-pressed="true"] { opacity: 1; box-shadow: inset 0 -3px 0 var(--mark-strong); }
+.lang button:focus-visible { outline: 2px solid var(--mark-strong); }
+@media (max-width: 700px) {
+  .about { grid-template-columns: 1fr; align-content: start; }
+  .about__back { width: 38vw; }
+}
+
+/* ---------- prototype controls (not part of the site) ---------- */
+.proto {
+  position: fixed; z-index: 40;
+  right: calc(12px + env(safe-area-inset-right, 0px));
+  bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+  font: 500 12px/1.3 var(--body);
+  color: #111;
+}
+.proto__toggle {
+  all: unset; cursor: pointer;
+  background: #fff; color: #111;
+  padding: 8px 12px; letter-spacing: .1em; text-transform: uppercase; font-weight: 700; font-size: 11px;
+  box-shadow: 0 4px 18px rgb(0 0 0 / .35);
+}
+.proto__toggle:focus-visible { outline: 2px solid #111; outline-offset: 2px; }
+.proto__panel {
+  background: #fff; padding: 14px; margin-bottom: 8px; width: min(270px, calc(100vw - 24px));
+  display: grid; gap: 12px; box-shadow: 0 8px 30px rgb(0 0 0 / .4);
+}
+.proto__panel p { margin: 0; color: #555; }
+.proto fieldset { border: 0; margin: 0; padding: 0; display: grid; gap: 6px; }
+.proto legend { font-weight: 700; text-transform: uppercase; letter-spacing: .1em; font-size: 10px; color: #444; margin-bottom: 4px; }
+.proto .opts { display: flex; flex-wrap: wrap; gap: 4px; }
+.proto .opts button {
+  all: unset; cursor: pointer; padding: 5px 8px; border: 1px solid #ccc; color: #111;
+}
+.proto .opts button[aria-pressed="true"] { background: #111; color: #fff; border-color: #111; }
+.proto .opts button:focus-visible { outline: 2px solid #111; outline-offset: 1px; }
+.swatch { width: 10px; height: 10px; display: inline-block; vertical-align: -1px; margin-right: 5px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .viewer, .about { animation: none; }
+  .tile img { transition: none; }
+}
+</style>
+
+<main class="wall" id="wall" aria-label="Photographs"></main>
+
+<div class="viewer" id="viewer" hidden role="dialog" aria-modal="true" aria-label="Photograph">
+  <img id="viewerImg" alt="">
+  <button class="tri tri--prev" id="prev" aria-label="Previous photograph in series">
+    <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polygon points="100,0 100,100 0,50"/></svg>
+  </button>
+  <button class="tri tri--next" id="next" aria-label="Next photograph in series">
+    <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polygon points="0,0 0,100 100,50"/></svg>
+  </button>
+</div>
+
+<section class="about" id="about" hidden role="dialog" aria-modal="true" aria-labelledby="aboutName">
+  <button class="about__back" id="aboutBack" aria-label="Back to the photographs">
+    <svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="50"/></svg>
+  </button>
+  <div class="about__text">
+    <h1 id="aboutName"></h1>
+    <p class="placeholder" id="aboutBio"></p>
+    <p class="placeholder" id="aboutContact"></p>
+    <div class="lang" role="group" aria-label="Language">
+      <button id="langEn" aria-pressed="true" lang="en">EN</button>
+      <button id="langHu" aria-pressed="false" lang="hu">HU</button>
+    </div>
+  </div>
+</section>
+
+<div class="proto" id="proto">
+  <div class="proto__panel" id="protoPanel" hidden>
+    <p>Prototype controls, not part of the site. Placeholder images are generated; your photographs replace them.</p>
+    <fieldset><legend>Field colour</legend><div class="opts" data-key="field"></div></fieldset>
+    <fieldset><legend>Tile shape</legend><div class="opts" data-key="ratio"></div></fieldset>
+    <fieldset><legend>Columns (desktop)</legend><div class="opts" data-key="cols"></div></fieldset>
+    <fieldset><legend>Marks</legend><div class="opts" data-key="mark"></div></fieldset>
+  </div>
+  <button class="proto__toggle" id="protoToggle" aria-expanded="false" aria-controls="protoPanel">Prototype</button>
+</div>
+
+<script>
+(() => {
+  /* ---------- prototype options ---------- */
+  const OPTIONS = {
+    field: [
+      ["Klein blue", "#002fa7"], ["Indigo", "#2a1fa8"], ["Ocean", "#005f8f"],
+      ["Ultramarine", "#1f35e0"], ["Pink", "#ff2e88"]
+    ],
+    ratio: [["1 : 1", "1 / 1"], ["4 : 5", "4 / 5"], ["3 : 4", "3 / 4"], ["3 : 2", "3 / 2"]],
+    cols: [["3", "3"], ["4", "4"], ["5", "5"], ["6", "6"]],
+    mark: [["Tone", "tone"], ["Black", "black"], ["White", "white"]]
+  };
+  const DEFAULTS = { field: "#002fa7", ratio: "1 / 1", cols: "4", mark: "tone" };
+  let state = { ...DEFAULTS };
+  try { Object.assign(state, JSON.parse(localStorage.getItem("proto-v1") || "{}")); } catch (e) {}
+
+  const root = document.documentElement;
+  function applyState() {
+    root.style.setProperty("--field", state.field);
+    root.style.setProperty("--ratio", state.ratio);
+    const m = state.mark;
+    root.style.setProperty("--mark", m === "black" ? "#0a0a0c" : m === "white" ? "#f4f4f6" : "color-mix(in oklab, var(--field), white 24%)");
+    root.style.setProperty("--mark-strong", m === "black" ? "#000" : m === "white" ? "#fff" : "color-mix(in oklab, var(--field), white 55%)");
+    layout();
+    document.querySelectorAll(".proto .opts").forEach(g => {
+      g.querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.value === state[g.dataset.key])));
+    });
+    try { localStorage.setItem("proto-v1", JSON.stringify(state)); } catch (e) {}
+  }
+  document.querySelectorAll(".proto .opts").forEach(g => {
+    OPTIONS[g.dataset.key].forEach(([label, value]) => {
+      const b = document.createElement("button");
+      b.type = "button"; b.dataset.value = value;
+      b.innerHTML = (g.dataset.key === "field" ? `<span class="swatch" style="background:${value}"></span>` : "") + label;
+      b.addEventListener("click", () => { state[g.dataset.key] = value; applyState(); });
+      g.appendChild(b);
+    });
+  });
+  const protoToggle = document.getElementById("protoToggle");
+  const protoPanel = document.getElementById("protoPanel");
+  protoToggle.addEventListener("click", () => {
+    protoPanel.hidden = !protoPanel.hidden;
+    protoToggle.setAttribute("aria-expanded", String(!protoPanel.hidden));
+  });
+
+  /* ---------- placeholder photographs (procedural landscapes) ---------- */
+  function rng(seed) {
+    return () => {
+      seed = (seed + 0x6D2B79F5) | 0;
+      let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+      t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+  const PALETTES = [
+    ["#9fb3c2", "#e6e1d6", "#5d6b70", "#20282b"],   // overcast north
+    ["#2b3446", "#c98f62", "#3a2e2e", "#120e10"],   // dusk
+    ["#7e9a8e", "#d8dccf", "#47584c", "#18211a"],   // fog forest
+    ["#c9c3b8", "#f1ece4", "#8b8478", "#2f2b26"],   // pale steppe
+    ["#0f1b2c", "#4e6a86", "#16202a", "#05080b"],   // night water
+    ["#b6533a", "#e8b27d", "#5a2a1f", "#1d0e0a"]    // burnt
+  ];
+  const RATIOS = [3/2, 2/3, 4/5, 1, 16/9, 5/4, 3/4];
+  const mix = (a, b, t) => {
+    const p = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
+    const A = p(a), B = p(b);
+    return `rgb(${A.map((v, i) => Math.round(v + (B[i] - v) * t)).join(",")})`;
+  };
+  function paint(seed) {
+    const r = rng(seed * 9973 + 17);
+    const ratio = RATIOS[Math.floor(r() * RATIOS.length)];
+    const long = 1100;
+    const w = ratio >= 1 ? long : Math.round(long * ratio);
+    const h = ratio >= 1 ? Math.round(long / ratio) : long;
+    const c = document.createElement("canvas"); c.width = w; c.height = h;
+    const x = c.getContext("2d");
+    const pal = PALETTES[Math.floor(r() * PALETTES.length)];
+    const mono = r() < 0.45;
+    const horizon = h * (0.3 + r() * 0.45);
+
+    let g = x.createLinearGradient(0, 0, 0, horizon);
+    g.addColorStop(0, pal[0]); g.addColorStop(1, pal[1]);
+    x.fillStyle = g; x.fillRect(0, 0, w, h);
+
+    if (r() < 0.35) {                       // low sun / moon
+      const sx = w * (0.2 + r() * 0.6), sy = horizon * (0.5 + r() * 0.4), sr = Math.min(w, h) * (0.04 + r() * 0.08);
+      const sg = x.createRadialGradient(sx, sy, 0, sx, sy, sr * 4);
+      sg.addColorStop(0, "rgba(255,248,235,.95)"); sg.addColorStop(0.25, "rgba(255,240,220,.35)"); sg.addColorStop(1, "rgba(255,240,220,0)");
+      x.fillStyle = sg; x.fillRect(0, 0, w, h);
+    }
+    const water = r() < 0.3;
+    const layers = 2 + Math.floor(r() * 3);
+    for (let L = 0; L < layers; L++) {
+      const t = layers === 1 ? 1 : L / (layers - 1);
+      const base = horizon + (water ? 0 : (h - horizon) * t * 0.55);
+      const amp = h * (0.03 + r() * 0.09) * (1 - t * 0.5);
+      const f1 = 1 + r() * 3, f2 = 4 + r() * 9, ph = r() * 10;
+      x.beginPath(); x.moveTo(0, h);
+      for (let px = 0; px <= w; px += 4) {
+        const u = px / w;
+        const y = base - amp * (0.6 * Math.sin(u * f1 * Math.PI + ph) + 0.3 * Math.sin(u * f2 * Math.PI + ph * 2) + 0.1 * Math.sin(u * 40 + L));
+        x.lineTo(px, y);
+      }
+      x.lineTo(w, h); x.closePath();
+      x.fillStyle = mix(pal[2], pal[3], t); x.fill();
+      if (water) break;
+    }
+    if (water) {
+      g = x.createLinearGradient(0, horizon, 0, h);
+      g.addColorStop(0, pal[1]); g.addColorStop(1, pal[3]);
+      x.fillStyle = g; x.fillRect(0, horizon + h * 0.01, w, h);
+    }
+    const fogY = horizon + (r() - 0.5) * h * 0.1, fogH = h * (0.08 + r() * 0.2);
+    g = x.createLinearGradient(0, fogY - fogH, 0, fogY + fogH);
+    g.addColorStop(0, "rgba(235,235,230,0)"); g.addColorStop(0.5, `rgba(235,235,230,${0.15 + r() * 0.45})`); g.addColorStop(1, "rgba(235,235,230,0)");
+    x.fillStyle = g; x.fillRect(0, 0, w, h);
+
+    const img = x.getImageData(0, 0, w, h), d = img.data, amt = 14 + r() * 20;
+    for (let i = 0; i < d.length; i += 4) {
+      const n = (Math.random() - 0.5) * amt;
+      let R = d[i] + n, G = d[i + 1] + n, B = d[i + 2] + n;
+      if (mono) { let l = 0.3 * R + 0.59 * G + 0.11 * B; l = 128 + (l - 128) * 1.35; R = G = B = l; }
+      d[i] = R; d[i + 1] = G; d[i + 2] = B;
+    }
+    x.putImageData(img, 0, 0);
+    const v = x.createRadialGradient(w / 2, h / 2, Math.min(w, h) * 0.35, w / 2, h / 2, Math.max(w, h) * 0.75);
+    v.addColorStop(0, "rgba(0,0,0,0)"); v.addColorStop(1, "rgba(0,0,0,.45)");
+    x.fillStyle = v; x.fillRect(0, 0, w, h);
+    return new Promise(res => c.toBlob(b => res(URL.createObjectURL(b)), "image/jpeg", 0.86));
+  }
+
+  /* ---------- content: singles and series ---------- */
+  // In the real site this comes from a data file (src/content/stream.yaml).
+  const SERIES_AT = { 3: 4, 8: 3, 13: 5, 19: 3 };   // tile index -> images in series
+  let photoId = 0;
+  const STREAM = [{ type: "about" }];
+  for (let i = 0; i < 24; i++) {
+    const n = SERIES_AT[i] || 1;
+    STREAM.push({ type: "work", images: Array.from({ length: n }, () => ({ id: photoId++, alt: "Placeholder landscape " + photoId })) });
+  }
+  const urls = [];
+
+  /* ---------- build the wall ---------- */
+  const wall = document.getElementById("wall");
+  let lastTile = null;
+  STREAM.forEach(item => {
+    const b = document.createElement("button");
+    b.type = "button";
+    if (item.type === "about") {
+      b.className = "tile tile--about";
+      b.setAttribute("aria-label", "About Márton Kopasz");
+      b.innerHTML = '<svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="30"/></svg>';
+      b.addEventListener("click", () => { lastTile = b; openAbout(); });
+    } else {
+      b.className = "tile";
+      b.setAttribute("aria-label", item.images.length > 1 ? `Series of ${item.images.length} photographs` : "Photograph");
+      const im = document.createElement("img");
+      im.alt = ""; im.decoding = "async";
+      item.tileImg = im;
+      b.appendChild(im);
+      b.addEventListener("click", () => { lastTile = b; openViewer(item); });
+    }
+    wall.appendChild(b);
+  });
+  const fills = [];
+  function layout() {
+    const vw = window.innerWidth, desk = +state.cols;
+    const cols = vw < 600 ? 2 : vw < 1000 ? Math.min(3, desk) : desk;
+    root.style.setProperty("--cols", cols);
+    fills.forEach(f => f.remove()); fills.length = 0;
+    const rem = STREAM.length % cols;
+    if (rem) for (let i = 0; i < cols - rem; i++) {
+      const f = document.createElement("div");
+      f.className = "tile tile--fill"; f.setAttribute("aria-hidden", "true");
+      wall.appendChild(f); fills.push(f);
+    }
+  }
+  window.addEventListener("resize", layout);
+
+  (async () => {
+    for (let id = 0; id < photoId; id++) {
+      urls[id] = await paint(id);
+      STREAM.forEach(item => {
+        if (item.tileImg && item.images[0].id === id) {
+          item.tileImg.onload = () => item.tileImg.classList.add("ready");
+          item.tileImg.src = urls[id];
+        }
+      });
+      if (viewerItem && viewerItem.images[viewerIdx].id === id) renderViewer();
+      await new Promise(r => setTimeout(r, 0));
+    }
+  })();
+
+  /* ---------- viewer ---------- */
+  const viewer = document.getElementById("viewer");
+  const vImg = document.getElementById("viewerImg");
+  let viewerItem = null, viewerIdx = 0;
+  function renderViewer() {
+    const ph = viewerItem.images[viewerIdx];
+    if (urls[ph.id]) vImg.src = urls[ph.id];
+    vImg.alt = ph.alt;
+    viewer.classList.toggle("is-series", viewerItem.images.length > 1);
+  }
+  function openViewer(item) {
+    viewerItem = item; viewerIdx = 0; renderViewer();
+    viewer.hidden = false; document.body.style.overflow = "hidden";
+    (item.images.length > 1 ? document.getElementById("next") : viewer).focus?.();
+  }
+  function closeViewer() {
+    viewer.hidden = true; viewerItem = null; document.body.style.overflow = "";
+    lastTile && lastTile.focus();
+  }
+  function step(d) {
+    const n = viewerItem.images.length; if (n < 2) return;
+    viewerIdx = (viewerIdx + d + n) % n; renderViewer();
+  }
+  viewer.tabIndex = -1;
+  viewer.addEventListener("click", e => {
+    if (e.target.closest("#prev")) return step(-1);
+    if (e.target.closest("#next")) return step(1);
+    closeViewer();
+  });
+  let tx = 0, ty = 0;
+  viewer.addEventListener("touchstart", e => { tx = e.touches[0].clientX; ty = e.touches[0].clientY; }, { passive: true });
+  viewer.addEventListener("touchend", e => {
+    const dx = e.changedTouches[0].clientX - tx, dy = e.changedTouches[0].clientY - ty;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) { e.preventDefault(); step(dx < 0 ? 1 : -1); }
+    else if (Math.abs(dy) > 80) { e.preventDefault(); closeViewer(); }
+  });
+
+  /* ---------- about ---------- */
+  const about = document.getElementById("about");
+  const TEXT = {
+    en: { name: "Márton Kopasz", bio: "Placeholder. Your statement and short biography go here, in English.", contact: "Placeholder. Contact email and links go here." },
+    hu: { name: "Kopasz Márton", bio: "Helyőrző. Ide kerül a bemutatkozás és a rövid életrajz, magyarul.", contact: "Helyőrző. Ide kerül az e-mail-cím és az elérhetőségek." }
+  };
+  let lang = "en";
+  function renderAbout() {
+    const t = TEXT[lang];
+    about.lang = lang;
+    document.getElementById("aboutName").textContent = t.name;
+    document.getElementById("aboutBio").textContent = t.bio;
+    document.getElementById("aboutContact").textContent = t.contact;
+    document.getElementById("langEn").setAttribute("aria-pressed", String(lang === "en"));
+    document.getElementById("langHu").setAttribute("aria-pressed", String(lang === "hu"));
+  }
+  function openAbout() { renderAbout(); about.hidden = false; document.body.style.overflow = "hidden"; document.getElementById("aboutBack").focus(); }
+  function closeAbout() { about.hidden = true; document.body.style.overflow = ""; lastTile && lastTile.focus(); }
+  document.getElementById("aboutBack").addEventListener("click", closeAbout);
+  document.getElementById("langEn").addEventListener("click", () => { lang = "en"; renderAbout(); });
+  document.getElementById("langHu").addEventListener("click", () => { lang = "hu"; renderAbout(); });
+
+  document.addEventListener("keydown", e => {
+    if (!viewer.hidden) {
+      if (e.key === "Escape") closeViewer();
+      else if (e.key === "ArrowRight") step(1);
+      else if (e.key === "ArrowLeft") step(-1);
+    } else if (!about.hidden && e.key === "Escape") closeAbout();
+  });
+
+  applyState();
+})();
+</script>

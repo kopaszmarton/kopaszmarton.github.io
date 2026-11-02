@@ -5,7 +5,7 @@ Each phase ends with something reviewable. Tick items as they land on `main`.
 ## Phase 0 — Philosophy & brief
 - [x] Initial conversation: purpose, audience, structure
 - [x] `CLAUDE.md`, `docs/BRIEF.md`, `docs/DECISIONS.md`, this roadmap
-- [ ] Owner reviews and corrects the brief
+- [x] Owner reviews and corrects the brief
 
 ## Phase 1 — Content model
 - [ ] Resolve open questions 5–8 in the brief (launch size, order, About, language)
@@ -13,8 +13,10 @@ Each phase ends with something reviewable. Tick items as they land on `main`.
 - [ ] Define the image preparation workflow (export settings from Lightroom/Capture One etc.)
 
 ## Phase 2 — Design direction
-- [ ] Resolve open questions 1–4 (tiling, image view, background, identity)
-- [ ] 2–3 clickable prototypes with real photographs
+- [x] Resolve tiling, image view, background direction (D-006 – D-010)
+- [x] Prototype v1 with placeholder images (`prototypes/stream-v1.html`)
+- [ ] Choose field colour, tile proportion, columns, mark colour in the prototype
+- [ ] Prototype v2 with real photographs
 - [ ] Choose direction; fix design tokens (type, spacing, colour, grid)
 
 ## Phase 3 — Technical skeleton

@@ -1,6 +1,6 @@
 # Brief
 
-_Last updated: 2026-11-02 · Phase 0_
+_Last updated: 2026-11-02 · Phase 2 (design direction)_
 
 ## Purpose
 
@@ -41,21 +41,22 @@ Serious · restrained · quiet interface · wild images.
 Classy without being decorative. No visual effects that compete with the
 photographs.
 
-## Open questions (to resolve in Phase 1–2)
+## Resolved in round 2 (2026-11-02)
 
-1. **Tiling method.** Uniform squares crop the photographs. Options that keep
-   each image's real proportions: _justified rows_ (equal-height rows,
-   like a contact sheet) or _masonry_ (equal-width columns). Proposed:
-   justified rows.
-2. **Image view.** Full-screen viewer with arrow-key / swipe navigation through
-   the stream? Any caption there, or none at all?
-3. **Background.** Dark, light, or neutral grey? (Affects how the images read.)
-4. **Name / identity.** How the name is set typographically; any existing
-   personal mark.
-5. **Launch size.** How many images in the first published stream
-   (suggestion: 40–80)?
+- Tiling: equal tiles, no gaps (D-006) · Viewer: screen-size image on the
+  colour field (D-008) · Background: one bold colour, blue direction (D-007)
+- Singles and series share the wall (D-005) · English and Hungarian (D-009)
+- Controls are large geometric shapes (D-010)
+
+## Open questions
+
+1. **Exact field colour.** Klein blue, indigo, ocean, ultramarine, or pink?
+2. **Tile proportion and column count.** Square, 4:5, 3:4 or 3:2? 3–6 columns?
+3. **Mark colour.** A tone of the field, black, or white?
+4. **Name and identity.** Should the name appear anywhere outside About
+   (browser tab title only, or a single name tile)? Exact form of the name
+   (Márton Kopasz / Kopasz Márton) to confirm.
+5. **Launch size.** How many tiles at launch (suggestion: 40–80)?
 6. **Order.** Hand-sequenced, chronological, or a mix?
-7. **About content.** Bio, statement, portrait, contact email, social links,
-   CV / exhibitions?
-8. **Language.** English only, or also Hungarian?
-9. **Custom domain** now or later?
+7. **About content.** Statement, bio, portrait, contact, CV / exhibitions?
+8. **Custom domain** now or later?
