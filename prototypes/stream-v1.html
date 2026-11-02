@@ -152,6 +152,17 @@ body { color: var(--ink); font-family: var(--body); overflow-x: hidden; }
 .proto .opts button[aria-pressed="true"] { background: #111; color: #fff; border-color: #111; }
 .proto .opts button:focus-visible { outline: 2px solid #111; outline-offset: 1px; }
 .swatch { width: 10px; height: 10px; display: inline-block; vertical-align: -1px; margin-right: 5px; }
+.picker { display: flex; gap: 6px; align-items: stretch; }
+.picker input[type="color"] { width: 44px; height: 34px; padding: 0; border: 1px solid #ccc; background: none; cursor: pointer; }
+.picker input[type="text"] {
+  flex: 1; min-width: 0; font: 600 13px/1 ui-monospace, "SF Mono", Menlo, monospace; letter-spacing: .04em;
+  padding: 0 8px; border: 1px solid #ccc; color: #111; background: #fff; text-transform: lowercase;
+}
+.picker button { all: unset; cursor: pointer; padding: 0 10px; border: 1px solid #111; font-weight: 700; display: flex; align-items: center; }
+.picker input:focus-visible, .picker button:focus-visible { outline: 2px solid #111; outline-offset: 1px; }
+.proto input[type="range"] { width: 100%; accent-color: #111; }
+.tone-preview { height: 34px; background: var(--field); display: flex; align-items: center; padding-left: 10px; }
+.tone-preview span { width: 0; height: 0; border-style: solid; border-width: 10px 0 10px 18px; border-color: transparent transparent transparent var(--mark); }
 
 @media (prefers-reduced-motion: reduce) {
   .viewer { animation: none; }
@@ -191,10 +202,23 @@ body { color: var(--ink); font-family: var(--body); overflow-x: hidden; }
 <div class="proto" id="proto">
   <button class="proto__toggle" id="protoToggle" aria-expanded="false" aria-controls="protoPanel">Prototype</button>
   <div class="proto__panel" id="protoPanel" hidden>
-    <p>Prototype controls, not part of the site. Placeholder images are generated; your photographs replace them. Defaults are your choices: indigo, square, 4 columns, 2 on phones, toned marks.</p>
+    <p>Prototype controls, not part of the site. Placeholder images are generated; your photographs replace them. Square tiles, 4 columns and toned marks are fixed; pick the colour below.</p>
     <fieldset><legend>Phone columns</legend><div class="opts" data-key="phone"></div></fieldset>
-    <fieldset><legend>Marks</legend><div class="opts" data-key="mark"></div></fieldset>
-    <fieldset><legend>Field colour</legend><div class="opts" data-key="field"></div></fieldset>
+    <fieldset>
+      <legend>Field colour</legend>
+      <div class="picker">
+        <input type="color" id="fieldPicker" aria-label="Pick the field colour">
+        <input type="text" id="fieldHex" spellcheck="false" autocomplete="off" maxlength="7" aria-label="Field colour as hex code">
+        <button type="button" id="fieldCopy">Copy</button>
+      </div>
+      <div class="opts" data-key="field"></div>
+    </fieldset>
+    <fieldset>
+      <legend>Mark tone <span id="toneOut"></span></legend>
+      <input type="range" id="tone" min="6" max="50" step="1" aria-label="How much lighter the triangles and circle are than the field">
+      <div class="tone-preview" aria-hidden="true"><span></span></div>
+    </fieldset>
+    <p>Tip: open a photograph first, then change the colour, to judge it around an image. Send me the hex code when you have it.</p>
   </div>
 </div>
 
@@ -203,25 +227,42 @@ body { color: var(--ink); font-family: var(--body); overflow-x: hidden; }
   /* ---------- prototype options ---------- */
   const OPTIONS = {
     phone: [["1", "1"], ["2", "2"], ["3", "3"]],
-    mark: [["Tone", "tone"], ["Black", "black"], ["White", "white"]],
-    field: [["Indigo", "#2a1fa8"], ["Deep indigo", "#1d1580"], ["Klein blue", "#002fa7"], ["Ocean", "#005f8f"]]
+    field: [["Indigo", "#2a1fa8"], ["Deep indigo", "#1d1580"], ["Night indigo", "#170f63"], ["Ink", "#120c45"], ["Prussian", "#0d1d4f"], ["Klein", "#002fa7"]]
   };
-  const DEFAULTS = { phone: "2", mark: "tone", field: "#2a1fa8" };
+  const DEFAULTS = { phone: "2", field: "#2a1fa8", tone: 24 };
   let state = { ...DEFAULTS };
-  try { Object.assign(state, JSON.parse(localStorage.getItem("proto-v3") || "{}")); } catch (e) {}
+  try { Object.assign(state, JSON.parse(localStorage.getItem("proto-v4") || "{}")); } catch (e) {}
 
   const root = document.documentElement;
+  const picker = document.getElementById("fieldPicker");
+  const hex = document.getElementById("fieldHex");
+  const tone = document.getElementById("tone");
   function applyState() {
     root.style.setProperty("--field", state.field);
-    const m = state.mark;
-    root.style.setProperty("--mark", m === "black" ? "#0a0a0c" : m === "white" ? "#f4f4f6" : "color-mix(in oklab, var(--field), white 24%)");
-    root.style.setProperty("--mark-strong", m === "black" ? "#000" : m === "white" ? "#fff" : "color-mix(in oklab, var(--field), white 55%)");
+    root.style.setProperty("--mark", `color-mix(in oklab, var(--field), white ${state.tone}%)`);
+    root.style.setProperty("--mark-strong", `color-mix(in oklab, var(--field), white ${Math.min(80, state.tone + 30)}%)`);
+    picker.value = state.field;
+    if (document.activeElement !== hex) hex.value = state.field;
+    tone.value = state.tone;
+    document.getElementById("toneOut").textContent = state.tone + "%";
     layout();
     document.querySelectorAll(".proto .opts").forEach(g => {
       g.querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.value === state[g.dataset.key])));
     });
-    try { localStorage.setItem("proto-v3", JSON.stringify(state)); } catch (e) {}
+    try { localStorage.setItem("proto-v4", JSON.stringify(state)); } catch (e) {}
   }
+  picker.addEventListener("input", () => { state.field = picker.value; applyState(); });
+  hex.addEventListener("input", () => {
+    let v = hex.value.trim(); if (v[0] !== "#") v = "#" + v;
+    if (/^#[0-9a-f]{6}$/i.test(v)) { state.field = v.toLowerCase(); applyState(); }
+  });
+  hex.addEventListener("blur", () => { hex.value = state.field; });
+  tone.addEventListener("input", () => { state.tone = +tone.value; applyState(); });
+  document.getElementById("fieldCopy").addEventListener("click", e => {
+    const btn = e.currentTarget;
+    const done = () => { btn.textContent = "Copied"; setTimeout(() => (btn.textContent = "Copy"), 1200); };
+    navigator.clipboard?.writeText(state.field).then(done, () => { hex.focus(); hex.select(); });
+  });
   document.querySelectorAll(".proto .opts").forEach(g => {
     OPTIONS[g.dataset.key].forEach(([label, value]) => {
       const b = document.createElement("button");
