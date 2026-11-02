@@ -6,7 +6,7 @@ file, raise it with the owner before acting — then update this file.
 
 ## What this is
 
-The photographic portfolio of Márton Kopasz, published at
+The photographic portfolio of Kopasz Márton, published at
 `https://kopaszmarton.github.io` via GitHub Pages.
 Photography only — no graphic or visual design work appears here.
 
@@ -25,10 +25,11 @@ Languages: English and Hungarian.
   The visitor should forget it is a website: it should feel like looking at
   prints, not using an interface.
 - **One bold colour field.** Indigo (`#2a1fa8`) behind everything. Never white.
-- **Geometry instead of interface.** Controls are large, simple shapes:
-  circle = the person / About, triangle = move through a series, tapping the
+- **Geometry instead of interface.** Controls are large, simple shapes in a
+  tone of the indigo: circle = the person / About, triangle = move through a series, tapping the
   field = go back. No icons, no menus, no small UI chrome.
-- **About is where the wall ends,** never a tile among the photographs.
+- **About is where the wall ends,** never a tile among the photographs, and
+  there is no button or shape that leads to it. The name is small and humble.
 - **Rules may be broken on purpose** (cropped type, shapes over photos) when
   the philosophy asks for it — see D-013. Never at the cost of legibility of
   the name, accessibility or speed.

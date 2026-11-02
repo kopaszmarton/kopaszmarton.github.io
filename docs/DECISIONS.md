@@ -5,6 +5,17 @@ one — do not edit history.
 
 ---
 
+### D-014 · No About entry; humble name; phone and marks settled — supersedes parts of D-011/D-012 — 2026-11-02
+- No entry to About at all (the horizon half circle is removed). An entry
+  point grabs attention like a commercial site; About is found only by
+  reaching the end of the wall, the way the last page of a book is found.
+- The name is small and humble. Boldness lives in the shapes and the
+  colour field, not in the name.
+- Name: **Kopasz Márton** (Hungarian order) in both languages.
+- Phones: two columns. Marks (triangles, circle): a tone of the indigo field;
+  black and white were too strong.
+- The layout of the About section itself is still open.
+
 ### D-013 · Break conventions where the philosophy asks for it — 2026-11-02
 Reference: David O'Reilly — function and conviction over trends and "good
 design" rules. Allowed and intended: type and shapes cropped by the screen

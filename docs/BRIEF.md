@@ -49,14 +49,13 @@ photographs.
 - Controls are large geometric shapes (D-010)
 - Indigo, square, four columns (D-011) · About at the end of the wall (D-012)
 - Conventions may be broken for the philosophy (D-013)
+- No About entry, humble name Kopasz Márton, 2 phone columns, toned marks (D-014)
 
-## Open questions
+## Open questions (About section and details)
 
-1. **Phone layout.** One or two columns? (Prototype v2 has a switch.)
-2. **About entry.** Horizon half-circle (centre), corner, or none?
-3. **Mark colour.** A tone of the field, black, or white?
-4. **Name.** Exact form to confirm: Márton Kopasz (EN) / Kopasz Márton (HU).
-5. **Launch size.** How many tiles at launch (suggestion: 40–80)?
-6. **Order.** Hand-sequenced, chronological, or a mix?
-7. **About content.** Statement, bio, portrait, contact, CV / exhibitions?
-8. **Custom domain** now or later?
+See the latest design questions in the PR / conversation of 2026-11-02;
+answers go into DECISIONS.md.
+
+1. About: what it contains, how it is laid out, and how the wall ends.
+2. Order of the wall, launch size, series behaviour.
+3. Custom domain now or later?

@@ -4,9 +4,8 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&display=swap">
 <style>
 /* Layout: an edge-to-edge wall of equal square tiles that dissolves into one
-   indigo field. About is not a tile: it is where the wall ends. A half
-   circle sits on the bottom edge of the screen like a sun on the horizon;
-   tapping it takes you down to the artist. Three shapes only:
+   indigo field. About is not a tile and has no entry: it is simply where the
+   wall ends. Bold shapes, humble name. Three shapes only:
    circle = the person, triangle = move, the field = back. */
 :root {
   color-scheme: dark;
@@ -20,7 +19,6 @@
   --pad: clamp(14px, 3.5vmin, 44px);
   --zone: clamp(84px, 17vw, 300px);
   --zone-v: 22dvh;
-  --sun: clamp(64px, 11vmin, 130px);        /* radius of the horizon circle */
   --display: "Archivo", "Helvetica Neue", Arial, sans-serif;
   --body: "Archivo", "Helvetica Neue", Arial, sans-serif;
   --t-fast: 180ms;
@@ -42,23 +40,6 @@ body { color: var(--ink); font-family: var(--body); overflow-x: hidden; }
 .tile img.ready { opacity: 1; }
 .tile:focus-visible { outline: 4px solid var(--mark-strong); outline-offset: -4px; z-index: 1; }
 .tile--fill { background: var(--field); cursor: default; pointer-events: none; }
-
-/* ---------- the horizon circle ---------- */
-.sun {
-  all: unset; cursor: pointer;
-  position: fixed; z-index: 10;
-  left: 50%; bottom: 0;
-  width: calc(2 * var(--sun)); height: var(--sun);
-  transform: translateX(-50%);
-  transition: transform 500ms cubic-bezier(.2, .7, .2, 1);
-}
-.sun svg { width: 100%; height: 100%; display: block; }
-.sun path { fill: var(--field); transition: fill var(--t-fast); }
-.sun:hover path, .sun:focus-visible path { fill: var(--mark); }
-.sun:focus-visible { outline: 3px solid var(--mark-strong); outline-offset: 4px; }
-.sun.is-set { transform: translate(-50%, 110%); }   /* sinks when About is in view */
-body.corner .sun { left: auto; right: 0; width: var(--sun); transform: none; }
-body.corner .sun.is-set { transform: translate(0, 110%); }
 
 /* ---------- viewer ---------- */
 .viewer {
@@ -102,18 +83,13 @@ body.corner .sun.is-set { transform: translate(0, 110%); }
   min-height: 100dvh;
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  grid-template-rows: auto 1fr;
   overflow: hidden;
 }
 .about__name {
-  grid-column: 1 / -1;
-  margin: 0;
+  margin: 0 0 1.4em;
   font-family: var(--display);
-  font-stretch: 125%; font-weight: 900;
-  font-size: 21vw; line-height: .8; letter-spacing: -.045em;
-  white-space: pre-line;
-  margin-left: -.06em;
-  padding-top: .12em;
+  font-weight: 600; font-stretch: 100%;
+  font-size: .95rem; letter-spacing: .04em;
   color: var(--ink);
 }
 .about__circle {
@@ -144,10 +120,9 @@ body.corner .sun.is-set { transform: translate(0, 110%); }
 .lang button[aria-pressed="true"] { opacity: 1; }
 .lang button:focus-visible { outline: 2px solid var(--mark-strong); }
 @media (max-width: 700px) {
-  .about { grid-template-columns: 1fr; grid-template-rows: auto auto 1fr; }
-  .about__name { font-size: 22vw; }
-  .about__text { grid-row: 2; padding-top: calc(var(--pad) * 2); padding-left: max(var(--pad), env(safe-area-inset-left, 0px)); }
-  .about__circle { grid-row: 3; width: 120vw; margin: 6vw 0 -60vw -10vw; }
+  .about { grid-template-columns: 1fr; grid-template-rows: auto 1fr; }
+  .about__text { grid-row: 1; padding-top: calc(var(--pad) * 3); padding-left: max(var(--pad), env(safe-area-inset-left, 0px)); }
+  .about__circle { grid-row: 2; width: 120vw; margin: 6vw 0 -60vw -10vw; }
 }
 
 /* ---------- prototype controls (not part of the site) ---------- */
@@ -180,7 +155,7 @@ body.corner .sun.is-set { transform: translate(0, 110%); }
 
 @media (prefers-reduced-motion: reduce) {
   .viewer { animation: none; }
-  .tile img, .sun { transition: none; }
+  .tile img { transition: none; }
 }
 </style>
 
@@ -188,11 +163,11 @@ body.corner .sun.is-set { transform: translate(0, 110%); }
   <div class="wall" id="wall" aria-label="Photographs"></div>
 
   <section class="about" id="about" aria-labelledby="aboutName">
-    <h1 class="about__name" id="aboutName"></h1>
     <button class="about__circle" id="aboutBack" aria-label="Back to the first photograph">
       <svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="50"/></svg>
     </button>
     <div class="about__text">
+      <h1 class="about__name" id="aboutName"></h1>
       <p class="placeholder" id="aboutBio"></p>
       <p class="placeholder" id="aboutContact"></p>
       <div class="lang" role="group" aria-label="Language">
@@ -202,10 +177,6 @@ body.corner .sun.is-set { transform: translate(0, 110%); }
     </div>
   </section>
 </main>
-
-<button class="sun" id="sun" aria-label="About Márton Kopasz">
-  <svg viewBox="0 0 200 100" preserveAspectRatio="none" aria-hidden="true"><path id="sunPath" d="M0,100 A100,100 0 0 1 200,100 Z"/></svg>
-</button>
 
 <div class="viewer" id="viewer" hidden role="dialog" aria-modal="true" aria-label="Photograph">
   <img id="viewerImg" alt="">
@@ -220,8 +191,7 @@ body.corner .sun.is-set { transform: translate(0, 110%); }
 <div class="proto" id="proto">
   <button class="proto__toggle" id="protoToggle" aria-expanded="false" aria-controls="protoPanel">Prototype</button>
   <div class="proto__panel" id="protoPanel" hidden>
-    <p>Prototype controls, not part of the site. Placeholder images are generated; your photographs replace them. Defaults are your choices: indigo, square, 4 columns.</p>
-    <fieldset><legend>About entry</legend><div class="opts" data-key="entry"></div></fieldset>
+    <p>Prototype controls, not part of the site. Placeholder images are generated; your photographs replace them. Defaults are your choices: indigo, square, 4 columns, 2 on phones, toned marks.</p>
     <fieldset><legend>Phone columns</legend><div class="opts" data-key="phone"></div></fieldset>
     <fieldset><legend>Marks</legend><div class="opts" data-key="mark"></div></fieldset>
     <fieldset><legend>Field colour</legend><div class="opts" data-key="field"></div></fieldset>
@@ -232,31 +202,25 @@ body.corner .sun.is-set { transform: translate(0, 110%); }
 (() => {
   /* ---------- prototype options ---------- */
   const OPTIONS = {
-    entry: [["Horizon (centre)", "horizon"], ["Corner", "corner"], ["None, end of wall only", "none"]],
     phone: [["1", "1"], ["2", "2"], ["3", "3"]],
     mark: [["Tone", "tone"], ["Black", "black"], ["White", "white"]],
     field: [["Indigo", "#2a1fa8"], ["Deep indigo", "#1d1580"], ["Klein blue", "#002fa7"], ["Ocean", "#005f8f"]]
   };
-  const DEFAULTS = { entry: "horizon", phone: "2", mark: "tone", field: "#2a1fa8" };
+  const DEFAULTS = { phone: "2", mark: "tone", field: "#2a1fa8" };
   let state = { ...DEFAULTS };
-  try { Object.assign(state, JSON.parse(localStorage.getItem("proto-v2") || "{}")); } catch (e) {}
+  try { Object.assign(state, JSON.parse(localStorage.getItem("proto-v3") || "{}")); } catch (e) {}
 
   const root = document.documentElement;
-  const sun = document.getElementById("sun");
   function applyState() {
     root.style.setProperty("--field", state.field);
     const m = state.mark;
     root.style.setProperty("--mark", m === "black" ? "#0a0a0c" : m === "white" ? "#f4f4f6" : "color-mix(in oklab, var(--field), white 24%)");
     root.style.setProperty("--mark-strong", m === "black" ? "#000" : m === "white" ? "#fff" : "color-mix(in oklab, var(--field), white 55%)");
-    document.body.classList.toggle("corner", state.entry === "corner");
-    sun.hidden = state.entry === "none";
-    document.getElementById("sunPath").setAttribute("d",
-      state.entry === "corner" ? "M200,0 A200,100 0 0 0 0,100 L200,100 Z" : "M0,100 A100,100 0 0 1 200,100 Z");
     layout();
     document.querySelectorAll(".proto .opts").forEach(g => {
       g.querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.value === state[g.dataset.key])));
     });
-    try { localStorage.setItem("proto-v2", JSON.stringify(state)); } catch (e) {}
+    try { localStorage.setItem("proto-v3", JSON.stringify(state)); } catch (e) {}
   }
   document.querySelectorAll(".proto .opts").forEach(g => {
     OPTIONS[g.dataset.key].forEach(([label, value]) => {
@@ -448,16 +412,14 @@ body.corner .sun.is-set { transform: translate(0, 110%); }
   /* ---------- about: the end of the wall ---------- */
   const about = document.getElementById("about");
   const smooth = matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
-  sun.addEventListener("click", () => about.scrollIntoView({ behavior: smooth }));
   document.getElementById("aboutBack").addEventListener("click", () => {
     window.scrollTo({ top: 0, behavior: smooth });
     const first = wall.querySelector(".tile"); first && first.focus({ preventScroll: true });
   });
-  new IntersectionObserver(([e]) => sun.classList.toggle("is-set", e.isIntersecting), { threshold: 0.15 }).observe(about);
 
   const TEXT = {
-    en: { name: "Márton\nKopasz", bio: "Placeholder. Your statement and short biography go here, in English.", contact: "Placeholder. Contact email and links go here." },
-    hu: { name: "Kopasz\nMárton", bio: "Helyőrző. Ide kerül a bemutatkozás és a rövid életrajz, magyarul.", contact: "Helyőrző. Ide kerül az e-mail-cím és az elérhetőségek." }
+    en: { name: "Kopasz Márton", bio: "Placeholder. Your statement and short biography go here, in English.", contact: "Placeholder. Contact email and links go here." },
+    hu: { name: "Kopasz Márton", bio: "Helyőrző. Ide kerül a bemutatkozás és a rövid életrajz, magyarul.", contact: "Helyőrző. Ide kerül az e-mail-cím és az elérhetőségek." }
   };
   let lang = "en";
   function renderAbout() {
