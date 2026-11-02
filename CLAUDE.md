@@ -24,11 +24,14 @@ Languages: English and Hungarian.
 - **No text on or around the images.** Words live on the About page only.
   The visitor should forget it is a website: it should feel like looking at
   prints, not using an interface.
-- **One bold colour field.** A single saturated colour (blue direction; exact
-  hue to be chosen) behind everything. Never white.
-- **Geometry instead of interface.** Controls are large, simple shapes in the
-  field colour's tone: circle = About/identity, triangle = move through a
-  series, tapping the field = go back. No icons, no small UI chrome.
+- **One bold colour field.** Indigo (`#2a1fa8`) behind everything. Never white.
+- **Geometry instead of interface.** Controls are large, simple shapes:
+  circle = the person / About, triangle = move through a series, tapping the
+  field = go back. No icons, no menus, no small UI chrome.
+- **About is where the wall ends,** never a tile among the photographs.
+- **Rules may be broken on purpose** (cropped type, shapes over photos) when
+  the philosophy asks for it — see D-013. Never at the cost of legibility of
+  the name, accessibility or speed.
 - **Serious, restrained, wild.** The interface is quiet and exact so the
   atmosphere of the photographs can be loud.
 - **No effects for their own sake.** No parallax, no hover gimmicks, no

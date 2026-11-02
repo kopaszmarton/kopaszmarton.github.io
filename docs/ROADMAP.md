@@ -15,8 +15,10 @@ Each phase ends with something reviewable. Tick items as they land on `main`.
 ## Phase 2 — Design direction
 - [x] Resolve tiling, image view, background direction (D-006 – D-010)
 - [x] Prototype v1 with placeholder images (`prototypes/stream-v1.html`)
-- [ ] Choose field colour, tile proportion, columns, mark colour in the prototype
-- [ ] Prototype v2 with real photographs
+- [x] Choose field colour, tile proportion, columns (D-011)
+- [x] Prototype v2: About at the end of the wall, horizon entry, phone view
+- [ ] Settle phone columns, About entry, mark colour
+- [ ] Prototype with real photographs (deferred by owner; placeholders are fine for now)
 - [ ] Choose direction; fix design tokens (type, spacing, colour, grid)
 
 ## Phase 3 — Technical skeleton

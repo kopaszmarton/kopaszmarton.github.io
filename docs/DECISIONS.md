@@ -5,6 +5,27 @@ one — do not edit history.
 
 ---
 
+### D-013 · Break conventions where the philosophy asks for it — 2026-11-02
+Reference: David O'Reilly — function and conviction over trends and "good
+design" rules. Allowed and intended: type and shapes cropped by the screen
+edge, a control drawn over the photographs, no header or menu, no drop
+shadows or decorative depth. Still non-negotiable: legibility of the name,
+accessibility, performance.
+
+### D-012 · About is where the wall ends, not a tile — supersedes the About tile in D-010 — 2026-11-02
+A tile for About made it look like one of the photographs: confusing and
+commonplace. Now the wall dissolves into the indigo field and About lives
+there, below the last row. The name is set huge and bleeds off the edges,
+next to a giant circle cropped by the page edge (tap it to return to the top).
+Entry: a half circle sitting on the bottom edge of the screen, like a sun on
+the horizon, drawn over the photographs; tapping it travels down to About.
+It sinks out of view once About is on screen.
+
+### D-011 · Indigo, square tiles, four columns — 2026-11-02
+Owner's choice from prototype v1: field colour indigo (#2a1fa8), tiles 1:1,
+four columns on desktop (three on tablets, two on phones; phone layout still
+open). Flat image in the viewer, no drop shadow.
+
 ### D-010 · Geometric controls — 2026-11-02 _(proposed, see prototype v1)_
 No icons or small UI. Three gestures only: a circle tile opens About (the circle
 returns from it); huge triangles move through a series; tapping anywhere else

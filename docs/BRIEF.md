@@ -47,15 +47,15 @@ photographs.
   colour field (D-008) · Background: one bold colour, blue direction (D-007)
 - Singles and series share the wall (D-005) · English and Hungarian (D-009)
 - Controls are large geometric shapes (D-010)
+- Indigo, square, four columns (D-011) · About at the end of the wall (D-012)
+- Conventions may be broken for the philosophy (D-013)
 
 ## Open questions
 
-1. **Exact field colour.** Klein blue, indigo, ocean, ultramarine, or pink?
-2. **Tile proportion and column count.** Square, 4:5, 3:4 or 3:2? 3–6 columns?
+1. **Phone layout.** One or two columns? (Prototype v2 has a switch.)
+2. **About entry.** Horizon half-circle (centre), corner, or none?
 3. **Mark colour.** A tone of the field, black, or white?
-4. **Name and identity.** Should the name appear anywhere outside About
-   (browser tab title only, or a single name tile)? Exact form of the name
-   (Márton Kopasz / Kopasz Márton) to confirm.
+4. **Name.** Exact form to confirm: Márton Kopasz (EN) / Kopasz Márton (HU).
 5. **Launch size.** How many tiles at launch (suggestion: 40–80)?
 6. **Order.** Hand-sequenced, chronological, or a mix?
 7. **About content.** Statement, bio, portrait, contact, CV / exhibitions?
