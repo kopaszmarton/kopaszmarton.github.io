@@ -18,14 +18,16 @@ Languages: English and Hungarian.
 ## Philosophy (design follows this, never the reverse)
 
 - **The images are the site.** Everything else exists to get out of their way.
-- **One wall of pictures.** An edge-to-edge grid of equal tiles, no gaps, no
-  borders, no header. A tile is either a single photograph or a series.
+- **One wall of pictures.** An edge-to-edge grid of square tiles (4 columns,
+  2 on phones), no gaps, no borders, no header, about 40 tiles at most.
+  Singles form a loose stream; a series is a run of tiles with one plain
+  field tile before and after it.
   Not categories, not a blog, and not a social-media feed.
 - **No text on or around the images.** Words live on the About page only.
   The visitor should forget it is a website: it should feel like looking at
   prints, not using an interface.
-- **One bold colour field.** Deep indigo (exact hex being chosen) behind
-  everything. Never white.
+- **One bold colour field.** Deep indigo `#140c5f` behind everything.
+  Never white. Text in Libre Franklin.
 - **Geometry instead of interface.** The only control shapes are large
   triangles (in a tone of the field) for moving through a series; tapping
   anywhere returns to the wall. No icons, no menus, no cursor hints.

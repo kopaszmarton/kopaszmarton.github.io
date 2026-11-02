@@ -9,7 +9,8 @@ Each phase ends with something reviewable. Tick items as they land on `main`.
 
 ## Phase 1 — Content model
 - [ ] Resolve open questions 5–8 in the brief (launch size, order, About, language)
-- [ ] Define the image data format (file, alt, optional title/place/year, order)
+- [x] Define the image data format (see `docs/prompts/gemini-briefing.md`)
+- [ ] Gather selection, sequence and About text (with Gemini's help)
 - [ ] Define the image preparation workflow (export settings from Lightroom/Capture One etc.)
 
 ## Phase 2 — Design direction
@@ -19,7 +20,7 @@ Each phase ends with something reviewable. Tick items as they land on `main`.
 - [x] Prototype v2: About at the end of the wall, horizon entry, phone view
 - [x] Settle phone columns, About entry, mark colour (D-014)
 - [x] About as a quiet colophon at the end of the wall (D-015)
-- [ ] Choose series representation, colour hex, typeface
+- [x] Choose series representation, colour hex, typeface (D-016)
 - [ ] Prototype with real photographs (deferred by owner; placeholders are fine for now)
 - [ ] Choose direction; fix design tokens (type, spacing, colour, grid)
 

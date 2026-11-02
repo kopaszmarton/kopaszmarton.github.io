@@ -11,7 +11,7 @@
    looking for them. Nothing fades, nothing animates. */
 :root {
   color-scheme: dark;
-  --field: #2a1fa8;
+  --field: #140c5f;
   --mark: color-mix(in oklab, var(--field), white 24%);
   --ink: #eceaf6;
   --ink-quiet: color-mix(in oklab, var(--ink), var(--field) 35%);
@@ -20,7 +20,7 @@
   --pad: clamp(14px, 3.5vmin, 44px);
   --zone: clamp(84px, 17vw, 300px);
   --zone-v: 22dvh;
-  --text: "Libre Caslon Text", Georgia, "Times New Roman", serif;
+  --text: "Libre Franklin", "Helvetica Neue", Arial, sans-serif;
   --ui: "Archivo", "Helvetica Neue", Arial, sans-serif;     /* prototype panel only */
 }
 html, body { background: var(--field); }
@@ -175,7 +175,7 @@ body { color: var(--ink); font-family: var(--text); overflow-x: hidden; }
 <div class="proto" id="proto">
   <button class="proto__toggle" id="protoToggle" aria-expanded="false" aria-controls="protoPanel">Prototype</button>
   <div class="proto__panel" id="protoPanel" hidden>
-    <p>Prototype controls, not part of the site. Placeholder images are generated; your photographs replace them.</p>
+    <p>Prototype controls, not part of the site. Placeholder images are generated; your photographs replace them. Defaults are now your choices: #140c5f, Franklin, series on the wall with pauses, triangles on hover.</p>
     <fieldset>
       <legend>Field colour</legend>
       <div class="picker">
@@ -201,7 +201,7 @@ body { color: var(--ink); font-family: var(--text); overflow-x: hidden; }
 (() => {
   /* ---------- prototype options ---------- */
   const OPTIONS = {
-    field: [["Indigo", "#2a1fa8"], ["Deep indigo", "#1d1580"], ["Night indigo", "#170f63"], ["Ink", "#120c45"], ["Prussian", "#0d1d4f"], ["Klein", "#002fa7"]],
+    field: [["Kopasz indigo (chosen)", "#140c5f"], ["Indigo", "#2a1fa8"], ["Deep indigo", "#1d1580"], ["Ink", "#120c45"]],
     font: [
       ["Caslon · museum label", "\"Libre Caslon Text\", Georgia, serif"],
       ["Garamond · old book", "\"EB Garamond\", Garamond, Georgia, serif"],
@@ -215,9 +215,9 @@ body { color: var(--ink); font-family: var(--text); overflow-x: hidden; }
     tri: [["Appear on hover", "hover"], ["Always visible", "always"]],
     phone: [["1", "1"], ["2", "2"], ["3", "3"]]
   };
-  const DEFAULTS = { phone: "2", field: "#2a1fa8", tone: 24, font: OPTIONS.font[0][1], series: "tile", tri: "hover" };
+  const DEFAULTS = { phone: "2", field: "#140c5f", tone: 24, font: OPTIONS.font[3][1], series: "run", tri: "hover" };
   let state = { ...DEFAULTS };
-  try { Object.assign(state, JSON.parse(localStorage.getItem("proto-v4") || "{}")); } catch (e) {}
+  try { Object.assign(state, JSON.parse(localStorage.getItem("proto-v5") || "{}")); } catch (e) {}
 
   const root = document.documentElement;
   const picker = document.getElementById("fieldPicker");
@@ -238,7 +238,7 @@ body { color: var(--ink); font-family: var(--text); overflow-x: hidden; }
     document.querySelectorAll(".proto .opts").forEach(g => {
       g.querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.value === String(state[g.dataset.key]))));
     });
-    try { localStorage.setItem("proto-v4", JSON.stringify(state)); } catch (e) {}
+    try { localStorage.setItem("proto-v5", JSON.stringify(state)); } catch (e) {}
   }
   document.querySelectorAll(".proto .opts").forEach(g => {
     OPTIONS[g.dataset.key].forEach(([label, value]) => {

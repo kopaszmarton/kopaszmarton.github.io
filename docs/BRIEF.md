@@ -57,10 +57,6 @@ photographs.
 
 ## Open questions
 
-1. **Series and singles:** how are they represented? Prototype offers
-   "one tile that opens into the series" vs "whole series on the wall,
-   separated by pauses of plain field".
-2. **Exact field colour** (deeper than indigo; colour picker in prototype).
-3. **Typeface** for the About text (seven examples in prototype).
-4. **Triangles on desktop:** appear on hover, or always visible?
-5. **About content:** final statement, bio, contact; long CV later.
+1. **Content:** selection, sequence, image data and About text. Gemini
+   briefing prompt: `docs/prompts/gemini-briefing.md`.
+2. **Long CV** for institutions: later.

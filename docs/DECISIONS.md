@@ -5,6 +5,17 @@ one — do not edit history.
 
 ---
 
+### D-016 · Colour, typeface, series display, triangles — 2026-11-02
+- Field colour: **`#140c5f`** (deep indigo), chosen by the owner with the colour picker.
+- About typeface: **Libre Franklin**.
+- Series appear on the wall as a **run of consecutive tiles with one plain
+  field tile before and after** (an exhibition hang); singles form the loose
+  stream between them.
+- Series triangles on desktop **appear only on hover**; on touch screens they
+  sit below the photograph.
+- A briefing prompt for Gemini (which knows the owner's archive) lives in
+  `docs/prompts/gemini-briefing.md`; it also defines the image data structure.
+
 ### D-015 · Quiet end, plain contact, no motion — supersedes the circle in D-010/D-012 — 2026-11-02
 Character: a creative, underground fine-art portfolio with an analog feel,
 something that "survived the century" — not a commercial or social-media site.
