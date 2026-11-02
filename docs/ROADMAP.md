@@ -5,16 +5,23 @@ Each phase ends with something reviewable. Tick items as they land on `main`.
 ## Phase 0 — Philosophy & brief
 - [x] Initial conversation: purpose, audience, structure
 - [x] `CLAUDE.md`, `docs/BRIEF.md`, `docs/DECISIONS.md`, this roadmap
-- [ ] Owner reviews and corrects the brief
+- [x] Owner reviews and corrects the brief
 
 ## Phase 1 — Content model
 - [ ] Resolve open questions 5–8 in the brief (launch size, order, About, language)
-- [ ] Define the image data format (file, alt, optional title/place/year, order)
+- [x] Define the image data format (see `docs/prompts/gemini-briefing.md`)
+- [ ] Gather selection, sequence and About text (with Gemini's help)
 - [ ] Define the image preparation workflow (export settings from Lightroom/Capture One etc.)
 
 ## Phase 2 — Design direction
-- [ ] Resolve open questions 1–4 (tiling, image view, background, identity)
-- [ ] 2–3 clickable prototypes with real photographs
+- [x] Resolve tiling, image view, background direction (D-006 – D-010)
+- [x] Prototype v1 with placeholder images (`prototypes/stream-v1.html`)
+- [x] Choose field colour, tile proportion, columns (D-011)
+- [x] Prototype v2: About at the end of the wall, horizon entry, phone view
+- [x] Settle phone columns, About entry, mark colour (D-014)
+- [x] About as a quiet colophon at the end of the wall (D-015)
+- [x] Choose series representation, colour hex, typeface (D-016)
+- [ ] Prototype with real photographs (deferred by owner; placeholders are fine for now)
 - [ ] Choose direction; fix design tokens (type, spacing, colour, grid)
 
 ## Phase 3 — Technical skeleton

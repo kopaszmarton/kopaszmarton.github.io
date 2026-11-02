@@ -1,6 +1,6 @@
 # Brief
 
-_Last updated: 2026-11-02 · Phase 0_
+_Last updated: 2026-11-02 · Phase 2 (design direction)_
 
 ## Purpose
 
@@ -37,25 +37,26 @@ Navigation is minimal: name (→ home) and About.
 
 ## Tone
 
+Reference points: Hiroshi Sugimoto, Bill Henson. Underground fine art,
+analog, timeless.
+
 Serious · restrained · quiet interface · wild images.
 Classy without being decorative. No visual effects that compete with the
 photographs.
 
-## Open questions (to resolve in Phase 1–2)
+## Resolved in round 2 (2026-11-02)
 
-1. **Tiling method.** Uniform squares crop the photographs. Options that keep
-   each image's real proportions: _justified rows_ (equal-height rows,
-   like a contact sheet) or _masonry_ (equal-width columns). Proposed:
-   justified rows.
-2. **Image view.** Full-screen viewer with arrow-key / swipe navigation through
-   the stream? Any caption there, or none at all?
-3. **Background.** Dark, light, or neutral grey? (Affects how the images read.)
-4. **Name / identity.** How the name is set typographically; any existing
-   personal mark.
-5. **Launch size.** How many images in the first published stream
-   (suggestion: 40–80)?
-6. **Order.** Hand-sequenced, chronological, or a mix?
-7. **About content.** Bio, statement, portrait, contact email, social links,
-   CV / exhibitions?
-8. **Language.** English only, or also Hungarian?
-9. **Custom domain** now or later?
+- Tiling: equal tiles, no gaps (D-006) · Viewer: screen-size image on the
+  colour field (D-008) · Background: one bold colour, blue direction (D-007)
+- Singles and series share the wall (D-005) · English and Hungarian (D-009)
+- Controls are large geometric shapes (D-010)
+- Indigo, square, four columns (D-011) · About at the end of the wall (D-012)
+- Conventions may be broken for the philosophy (D-013)
+- No About entry, humble name Kopasz Márton, 2 phone columns, toned marks (D-014)
+- No circle, plain-text contact, deliberate order, no motion (D-015)
+
+## Open questions
+
+1. **Content:** selection, sequence, image data and About text. Gemini
+   briefing prompt: `docs/prompts/gemini-briefing.md`.
+2. **Long CV** for institutions: later.

@@ -6,22 +6,43 @@ file, raise it with the owner before acting — then update this file.
 
 ## What this is
 
-The photographic portfolio of Márton Kopasz, published at
+The photographic portfolio of Kopasz Márton, published at
 `https://kopaszmarton.github.io` via GitHub Pages.
 Photography only — no graphic or visual design work appears here.
 
 Full brief: `docs/BRIEF.md` · Decisions: `docs/DECISIONS.md` · Plan: `docs/ROADMAP.md`
+Prototypes: `prototypes/` (throwaway design studies, not production code)
+
+Languages: English and Hungarian.
 
 ## Philosophy (design follows this, never the reverse)
 
 - **The images are the site.** Everything else exists to get out of their way.
-- **A single stream.** One continuous tiled field of photographs — not
-  categories, not projects, not a blog.
+- **One wall of pictures.** An edge-to-edge grid of square tiles (4 columns,
+  2 on phones), no gaps, no borders, no header, about 40 tiles at most.
+  Singles form a loose stream; a series is a run of tiles with one plain
+  field tile before and after it.
+  Not categories, not a blog, and not a social-media feed.
 - **No text on or around the images.** Words live on the About page only.
+  The visitor should forget it is a website: it should feel like looking at
+  prints, not using an interface.
+- **One bold colour field.** Deep indigo `#140c5f` behind everything.
+  Never white. Text in Libre Franklin.
+- **Geometry instead of interface.** The only control shapes are large
+  triangles (in a tone of the field) for moving through a series; tapping
+  anywhere returns to the wall. No icons, no menus, no cursor hints.
+- **About is where the wall ends,** never a tile among the photographs, and
+  there is no button or shape that leads to it. The name is small and humble.
+- **Rules may be broken on purpose** (cropped type, shapes over photos) when
+  the philosophy asks for it — see D-013. Never at the cost of legibility of
+  the name, accessibility or speed.
 - **Serious, restrained, wild.** The interface is quiet and exact so the
   atmosphere of the photographs can be loud.
-- **No effects for their own sake.** No parallax, no hover gimmicks, no
-  loading spinners, no autoplay. Motion only when it aids viewing.
+- **No motion.** No fades, transitions, parallax, spinners or autoplay.
+  Things appear instantly, like turning a page.
+- **Character:** underground fine-art photography with an analog feel.
+  References (inspiration, not imitation): Hiroshi Sugimoto, Bill Henson.
+- **Contact is plain text,** never a link. No social links.
 
 ## Hard constraints (GitHub Pages)
 

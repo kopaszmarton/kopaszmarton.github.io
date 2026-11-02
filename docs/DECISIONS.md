@@ -5,12 +5,109 @@ one — do not edit history.
 
 ---
 
+### D-016 · Colour, typeface, series display, triangles — 2026-11-02
+- Field colour: **`#140c5f`** (deep indigo), chosen by the owner with the colour picker.
+- About typeface: **Libre Franklin**.
+- Series appear on the wall as a **run of consecutive tiles with one plain
+  field tile before and after** (an exhibition hang); singles form the loose
+  stream between them.
+- Series triangles on desktop **appear only on hover**; on touch screens they
+  sit below the photograph.
+- A briefing prompt for Gemini (which knows the owner's archive) lives in
+  `docs/prompts/gemini-briefing.md`; it also defines the image data structure.
+
+### D-015 · Quiet end, plain contact, no motion — supersedes the circle in D-010/D-012 — 2026-11-02
+Character: a creative, underground fine-art portfolio with an analog feel,
+something that "survived the century" — not a commercial or social-media site.
+Points of reference (inspiration, not imitation): Hiroshi Sugimoto, Bill Henson.
+
+- **No circle.** The only shapes left are the series triangles; the field is
+  the "back" gesture. About is a quiet, informative text block at the end of
+  the wall, aligned to the wall's columns, like a colophon.
+- **Contact is plain text, not a link.** No social links for now.
+- **Deliberate order** on the wall (no shuffle). Around 40 tiles at most.
+- **No animation or fades anywhere.** Images and the viewer appear instantly;
+  motion would take focus from the photographs. No zoom/hand cursors either:
+  nothing on or over a photograph signals "click me".
+- **Viewer:** a tap anywhere (photo or field) returns to the wall.
+  Triangles on desktop appear only while the pointer is in their zone
+  (proposed, to be confirmed in the prototype); on touch screens they sit
+  below the photograph, never on it.
+- **Cropping:** automatic, centred. No per-photo crop work.
+- **No texture** on the field. **No own domain** yet.
+- Long CV for institutions: decide later.
+
+### D-014 · No About entry; humble name; phone and marks settled — supersedes parts of D-011/D-012 — 2026-11-02
+- No entry to About at all (the horizon half circle is removed). An entry
+  point grabs attention like a commercial site; About is found only by
+  reaching the end of the wall, the way the last page of a book is found.
+- The name is small and humble. Boldness lives in the shapes and the
+  colour field, not in the name.
+- Name: **Kopasz Márton** (Hungarian order) in both languages.
+- Phones: two columns. Marks (triangles, circle): a tone of the indigo field;
+  black and white were too strong.
+- The layout of the About section itself is still open.
+
+### D-013 · Break conventions where the philosophy asks for it — 2026-11-02
+Reference: David O'Reilly — function and conviction over trends and "good
+design" rules. Allowed and intended: type and shapes cropped by the screen
+edge, a control drawn over the photographs, no header or menu, no drop
+shadows or decorative depth. Still non-negotiable: legibility of the name,
+accessibility, performance.
+
+### D-012 · About is where the wall ends, not a tile — supersedes the About tile in D-010 — 2026-11-02
+A tile for About made it look like one of the photographs: confusing and
+commonplace. Now the wall dissolves into the indigo field and About lives
+there, below the last row. The name is set huge and bleeds off the edges,
+next to a giant circle cropped by the page edge (tap it to return to the top).
+Entry: a half circle sitting on the bottom edge of the screen, like a sun on
+the horizon, drawn over the photographs; tapping it travels down to About.
+It sinks out of view once About is on screen.
+
+### D-011 · Indigo, square tiles, four columns — 2026-11-02
+Owner's choice from prototype v1: field colour indigo (#2a1fa8), tiles 1:1,
+four columns on desktop (three on tablets, two on phones; phone layout still
+open). Flat image in the viewer, no drop shadow.
+
+### D-010 · Geometric controls — 2026-11-02 _(proposed, see prototype v1)_
+No icons or small UI. Three gestures only: a circle tile opens About (the circle
+returns from it); huge triangles move through a series; tapping anywhere else
+in the viewer, Esc, or swiping down returns to the wall. Marks are drawn in a
+tone of the field colour so they stay bold without competing with the photos.
+
+### D-009 · English and Hungarian — 2026-11-02
+The site is bilingual. Since the wall has no text, this mainly affects the
+About page, page titles, alt text and metadata.
+
+### D-008 · Viewer: screen-size image on the colour field — 2026-11-02
+Opening a tile shows the full, uncropped photograph as large as the screen
+allows, floating on the colour field. Single images: tap to return. Series:
+triangles (or swipe / arrow keys) move through the series.
+
+### D-007 · Bold single-colour field, never white — 2026-11-02
+White is too prosaic for artistic imagery. One saturated colour carries the
+whole site; black-and-white and colour photographs both sit on it. Direction:
+deep/harsh blue (Klein blue, indigo, ocean); pink kept as an alternative.
+Exact hue to be chosen from the prototype.
+
+### D-006 · Equal tiles, no gaps — supersedes the tiling options in BRIEF — 2026-11-02
+The wall is a grid of equal-width, equal-height tiles with no borders or gaps.
+Consequence: photographs are cropped in the tile and shown whole only in the
+viewer. Each image will get an optional focal point so the crop can be
+controlled. Tile proportion (1:1 vs 4:5 etc.) to be chosen from the prototype;
+watch that a 3-column square grid reads as a social-media profile.
+
+### D-005 · Singles and series in one wall — supersedes D-003 — 2026-11-02
+The wall mixes single photographs and series. A series appears as one tile
+(its first image) and is browsed inside the viewer. Text still appears only
+on the About page.
+
 ### D-004 · Curated selection, not the archive — 2026-11-02
 The site shows a selected stream from a large archive. Reasons: a stronger
 portfolio for an institutional audience, and GitHub Pages' ~1 GB limit (with
 git history counting every image ever committed).
 
-### D-003 · Single tiled stream, no text on images — 2026-11-02
+### D-003 · Single tiled stream, no text on images — 2026-11-02 _(superseded by D-005)_
 The portfolio is one continuous tiled field of photographs. Words appear only
 on the About page. Reason: the owner's philosophy — the images carry the site.
 
